@@ -5,8 +5,8 @@ import API from "goals-todos-api";
  * @type {string}
  * @constant
  */
-const ADD_GOAL = "ADD_GOAL";
-const REMOVE_GOAL = "REMOVE_GOAL";
+export const ADD_GOAL = "ADD_GOAL";
+export const REMOVE_GOAL = "REMOVE_GOAL";
 
 /**
  * Adds Goal
