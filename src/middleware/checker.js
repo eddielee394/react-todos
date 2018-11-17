@@ -8,15 +8,15 @@ import { ADD_TODO } from "../actions/todos";
  * @return {function(*): function(*=): *}
  */
 const checker = store => next => action => {
-  if (action.type === ADD_TODO) {
-    let alertText = `Don't forget to ${action.todo.name}`;
-    alert(alertText);
-  }
-
-  if (action.type === ADD_GOAL) {
-    let alertText = "That's a great goal!";
-    alert(alertText);
-  }
+  // if (action.type === ADD_TODO) {
+  //   let alertText = `Don't forget to ${action.todo.name}`;
+  //   alert(alertText);
+  // }
+  //
+  // if (action.type === ADD_GOAL) {
+  //   let alertText = "That's a great goal!";
+  //   alert(alertText);
+  // }
 
   //otherweise move to the next action
   return next(action);
