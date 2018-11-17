@@ -1,4 +1,4 @@
-import API from 'goals-todos-api';
+import API from "goals-todos-api";
 
 /**
  * Global Constants
@@ -15,12 +15,12 @@ export const TOGGLE_TODO = "TOGGLE_TODO";
  * @param todo
  * @return {{type: string, todo: *}}
  */
-function addTodo(todo) {
-    return {
-        type: ADD_TODO,
-        todo
-    };
-}
+const addTodo = todo => {
+  return {
+    type: ADD_TODO,
+    todo
+  };
+};
 
 /**
  * Remove Todo
@@ -28,12 +28,12 @@ function addTodo(todo) {
  * @param id
  * @return {{type: string, id: *}}
  */
-function removeTodo(id) {
-    return {
-        type: REMOVE_TODO,
-        id
-    };
-}
+const removeTodo = id => {
+  return {
+    type: REMOVE_TODO,
+    id
+  };
+};
 
 /**
  * Toggle Todo
@@ -41,13 +41,12 @@ function removeTodo(id) {
  * @param id
  * @return {{type: string, id: *}}
  */
-function toggleTodo(id) {
-    return {
-        type: TOGGLE_TODO,
-        id
-    };
-}
-
+const toggleTodo = id => {
+  return {
+    type: TOGGLE_TODO,
+    id
+  };
+};
 
 /**
  * Async Add Todo handler
@@ -55,64 +54,71 @@ function toggleTodo(id) {
  * @async
  * @param name
  * @param callback
- * @return {function(*): Promise<T | never>}
+ * @return {const(*): Promise<T | never>}
  */
-export const handleAddTodo = (name, callback=null) => (dispatch) => {
-    //pass the input value to get the item from the api
-    return API.saveTodo(name)
-    //then pass the item object
-    .then((todo) => {
+export const handleAddTodo = (name, callback = null) => dispatch => {
+  //pass the input value to get the item from the api
+  return (
+    API.saveTodo(name)
+      //then pass the item object
+      .then(todo => {
         //update the store with the object using dispatch()
-        dispatch( addTodo(todo));
-        
-        //fire callback function
+        dispatch(addTodo(todo));
+
+        //fire callback const
         callback();
-        
+
         //if there's an error
-    }).catch(() => {
+      })
+      .catch(() => {
         //alert the user
-        alert('There was an error.  Try again')
-    })
+        alert("There was an error.  Try again");
+      })
+  );
 };
 
 /**
  * Async Delete Todo handler
  * @summary Action Creator
  * @param todo
- * @return {function(*): Promise<T | never>}
+ * @return {const(*): Promise<T | never>}
  * @async
  */
-export const handleDeleteTodo = (todo) => (dispatch) => {
-    //first we update the state so the UI changes instantly
-    dispatch(removeTodo(todo.id));
-    //now we can make the api call to the server
-    return API.deleteTodo(todo.id)
-    //if there's an error
-    .catch(() => {
+export const handleDeleteTodo = todo => dispatch => {
+  //first we update the state so the UI changes instantly
+  dispatch(removeTodo(todo.id));
+  //now we can make the api call to the server
+  return (
+    API.deleteTodo(todo.id)
+      //if there's an error
+      .catch(() => {
         //add the previously deleted element back
         dispatch(addTodo(todo));
         //and send an alert to the user
-        alert('There was an error removing your item. Please try again.');
-    })
+        alert("There was an error removing your item. Please try again.");
+      })
+  );
 };
 
 /**
  * Async Toggle Todo handler
  * @summary Action Creator
  * @param id
- * @return {function(*): Promise<T | never>}
+ * @return {const(*): Promise<T | never>}
  * @async
  */
-export const handleToggleTodo = (id) => (dispatch) => {
-    //first we update the state so the UI changes instantly
-    dispatch(toggleTodo(id));
-    //now we can make the api call to the server
-    return API.saveTodoToggle(id)
-    //if there's an error
-    .catch(() => {
+export const handleToggleTodo = id => dispatch => {
+  //first we update the state so the UI changes instantly
+  dispatch(toggleTodo(id));
+  //now we can make the api call to the server
+  return (
+    API.saveTodoToggle(id)
+      //if there's an error
+      .catch(() => {
         //add the previously toggled element back
         dispatch(toggleTodo(id));
         //and send an alert to the user
-        alert('There was an error removing your item. Please try again.');
-    })
+        alert("There was an error removing your item. Please try again.");
+      })
+  );
 };
