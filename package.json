@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.3",
+    "gh-pages": "^2.0.1",
     "goals-todos-api": "^1.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -28,5 +29,7 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "homepage": "https://eddielee394.github.io/react-todos"
+
 }
