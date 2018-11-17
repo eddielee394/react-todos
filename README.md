@@ -2,6 +2,8 @@
 Basic todo app built with React.  
 ![](docs/screenshots/react_todos.gif)
 
+**Demo:** https://eddielee394.github.io/react-todos
+
 ## Codebase
 - React 16
 - Redux 4
