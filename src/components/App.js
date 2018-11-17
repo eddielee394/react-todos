@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
+import { Slide, ToastContainer } from "react-toastify";
 import Todos from "./Todos";
 import Goals from "./Goals";
 
@@ -51,6 +52,11 @@ class App extends Component {
           <Todos />
           <Goals />
         </div>
+        <ToastContainer
+          transition={Slide}
+          newestOnTop={true}
+          hideProgressBar={true}
+        />
       </div>
     );
   }

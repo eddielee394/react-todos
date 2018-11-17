@@ -1,4 +1,5 @@
 import API from "goals-todos-api";
+import { toast } from "react-toastify";
 
 /**
  * Global Constants
@@ -52,11 +53,23 @@ export const handleAddGoal = (name, callback) => dispatch => {
         dispatch(addGoal(goal));
         //run the callback const
         callback();
+
+        //Success notification
+        handleNotification(
+          `${name} successfully added`,
+          "success",
+          "alert-success"
+        );
+
         //if there's an error
       })
       .catch(() => {
-        //alert the user
-        alert("There was an error.  Try again");
+        //and alert the user
+        handleNotification(
+          "There was an error. Please try again.",
+          "error",
+          "alert-danger"
+        );
       })
   );
 };
@@ -73,8 +86,37 @@ export const handleDeleteGoal = goal => dispatch => {
   dispatch(removeGoal(goal));
   //return the api
   return API.deleteGoal(goal.id).catch(() => {
-    //if error, add the item back & display alert
+    //if error, add the item back
     dispatch(addGoal(goal));
-    alert("There was an error removing your item. Please try again.");
+
+    //and alert the user
+    handleNotification(
+      "There was an error. Please try again.",
+      "error",
+      "alert-danger"
+    );
+  });
+};
+
+/**
+ * Toast notification
+ * @param content {string} Text content the notification should display
+ * @param type {string} The type of notification.  Accepts: "info" | "success" | "warning" | "error" | "default"
+ * @param className {string} Container css class name
+ * @param progressClassName {string} Progress bar css class name
+ * @param autoClose {number} Time delay in ms before the toast closes
+ */
+const handleNotification = (
+  content,
+  type = "default",
+  className = "alert-primary",
+  progressClassName = "bg-primary",
+  autoClose = 1500
+) => {
+  toast(content, {
+    type,
+    className: `alert ${className}`,
+    progressClassName,
+    autoClose
   });
 };

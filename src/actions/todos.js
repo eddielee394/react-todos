@@ -1,4 +1,5 @@
 import API from "goals-todos-api";
+import { toast } from "react-toastify";
 
 /**
  * Global Constants
@@ -68,11 +69,22 @@ export const handleAddTodo = (name, callback = null) => dispatch => {
         //fire callback const
         callback();
 
+        //Success notification
+        handleNotification(
+          `${name} successfully added`,
+          "success",
+          "alert-success"
+        );
+
         //if there's an error
       })
       .catch(() => {
         //alert the user
-        alert("There was an error.  Try again");
+        handleNotification(
+          "There was an error. Please try again.",
+          "error",
+          "alert-danger"
+        );
       })
   );
 };
@@ -94,8 +106,13 @@ export const handleDeleteTodo = todo => dispatch => {
       .catch(() => {
         //add the previously deleted element back
         dispatch(addTodo(todo));
+
         //and send an alert to the user
-        alert("There was an error removing your item. Please try again.");
+        handleNotification(
+          "There was an error. Please try again.",
+          "error",
+          "alert-danger"
+        );
       })
   );
 };
@@ -118,7 +135,34 @@ export const handleToggleTodo = id => dispatch => {
         //add the previously toggled element back
         dispatch(toggleTodo(id));
         //and send an alert to the user
-        alert("There was an error removing your item. Please try again.");
+        handleNotification(
+          "There was an error. Please try again.",
+          "error",
+          "alert-danger"
+        );
       })
   );
+};
+
+/**
+ * Toast notification
+ * @param content {string} Text content the notification should display
+ * @param type {string} The type of notification.  Accepts: "default", "success", "info", "warning", "error"
+ * @param className {string} Container css class name
+ * @param progressClassName {string} Progress bar css class name
+ * @param autoClose {number} Time delay in ms before the toast closes
+ */
+const handleNotification = (
+  content,
+  type = "default",
+  className = "alert-primary",
+  progressClassName = "bg-primary",
+  autoClose = 1500
+) => {
+  toast(content, {
+    type,
+    className: `alert ${className}`,
+    progressClassName,
+    autoClose
+  });
 };
