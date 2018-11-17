@@ -25,8 +25,8 @@ class Todos extends Component {
   };
 
   render() {
-    const { todos, isLoading } = this.props;
-    const listItems = isLoading ? (
+    const { todos, loading } = this.props;
+    const listItems = loading ? (
       <Loader />
     ) : (
       <List
@@ -51,13 +51,15 @@ class Todos extends Component {
           />
         </div>
         <div className="col-4">
-          <button
-            id="todoBtn"
-            className="btn btn-primary"
-            onClick={this.handleAddItem}
-          >
-            Add Todo
-          </button>
+          <div className="btn-container d-flex justify-content-lg-end">
+            <button
+              id="todoBtn"
+              className="btn btn-primary"
+              onClick={this.handleAddItem}
+            >
+              Add Todo
+            </button>
+          </div>
         </div>
         <div className="col-12">{listItems}</div>
       </div>

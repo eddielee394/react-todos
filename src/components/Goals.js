@@ -16,8 +16,8 @@ class Goals extends Component {
   };
 
   render() {
-    const { goals, isLoading } = this.props;
-    const listItems = isLoading ? (
+    const { goals, loading } = this.props;
+    const listItems = loading ? (
       <Loader />
     ) : (
       <List removeItem={this.removeItem} items={goals} />
@@ -39,13 +39,15 @@ class Goals extends Component {
           />
         </div>
         <div className="col-4">
-          <button
-            id="goalBtn"
-            className="btn btn-primary"
-            onClick={this.handleAddItem}
-          >
-            Add Goal
-          </button>
+          <div className="btn-container d-flex justify-content-lg-end">
+            <button
+              id="goalBtn"
+              className="btn btn-primary"
+              onClick={this.handleAddItem}
+            >
+              Add Goal
+            </button>
+          </div>
         </div>
         <div className="col-12">{listItems}</div>
       </div>
