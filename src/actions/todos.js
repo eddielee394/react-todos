@@ -1,5 +1,5 @@
 import API from "goals-todos-api";
-import { toast } from "react-toastify";
+import {handleNotification} from "./shared";
 
 /**
  * Global Constants
@@ -144,25 +144,4 @@ export const handleToggleTodo = id => dispatch => {
   );
 };
 
-/**
- * Toast notification
- * @param content {string} Text content the notification should display
- * @param type {string} The type of notification.  Accepts: "default", "success", "info", "warning", "error"
- * @param className {string} Container css class name
- * @param progressClassName {string} Progress bar css class name
- * @param autoClose {number} Time delay in ms before the toast closes
- */
-const handleNotification = (
-  content,
-  type = "default",
-  className = "alert-primary",
-  progressClassName = "bg-primary",
-  autoClose = 1500
-) => {
-  toast(content, {
-    type,
-    className: `alert ${className}`,
-    progressClassName,
-    autoClose
-  });
-};
+

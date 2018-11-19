@@ -1,4 +1,5 @@
 import API from "goals-todos-api";
+import { toast } from "react-toastify";
 
 /**
  * Global Constants
@@ -34,4 +35,27 @@ export const handleInitialData = () => dispatch => {
       dispatch(receiveData(todos, goals));
     }
   );
+};
+
+/**
+ * Toast notification
+ * @param content {string} Text content the notification should display
+ * @param type {string} The type of notification.  Accepts: "default", "success", "info", "warning", "error"
+ * @param className {string} Container css class name
+ * @param progressClassName {string} Progress bar css class name
+ * @param autoClose {number} Time delay in ms before the toast closes
+ */
+export const handleNotification = (
+  content,
+  type = "default",
+  className = "alert-primary",
+  progressClassName = "bg-primary",
+  autoClose = 1500
+) => {
+  toast(content, {
+    type,
+    className: `alert ${className}`,
+    progressClassName,
+    autoClose
+  });
 };
